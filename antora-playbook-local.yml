@@ -1,0 +1,74 @@
+site:
+  title: Miterra // Docs
+  start_page: miterra-docs::index.adoc
+  url: https://ssm-wenr.github.io/miterra-site
+  robots: allow
+
+content:
+  sources:
+  - url: ../miterra-docs
+    branches: HEAD
+    start_path: docs
+  - url: ../miterra-dev-docs
+    branches: HEAD
+    start_path: docs
+
+git:
+  credentials:
+    path: ./git-credentials
+
+runtime:
+  fetch: true
+
+output:
+  destinations:
+    - provider: fs
+      path: ./build
+      clean: true
+
+antora:
+  extensions:
+    - ./ext/assign-project-url.js
+    - require: '@springio/antora-xref-extension'
+      log-unnecessary-link-text-warnings: true
+    - require: '@antora/lunr-extension'
+    - require: 'antora-shiki-extension'
+      theme: 'min-light'
+      languages: [asciidoc, shell, bash, console, python, javascript]
+      use_line_numbers: true
+      conums_override: true             # Enable custom styling
+      conums_bg_color: '#424242'        # Dark slate background
+      conums_fg_color: '#ffffff'        # White text
+      conums_show_border: false         # Show borders
+    - require: "asciidoctor-treeview/antora"
+      icon_source: antora # or embedded or jsdelivr
+
+asciidoc:
+  extensions:
+  - '@asciidoctor/tabs'
+  - '@djencks/asciidoctor-mathjax'
+  attributes:
+    page-pagination: '@'  # To unset pagination on a single page, set `:page-pagination!:` for the page.
+    experimental: true
+    icons: font
+    page-toclevels: 3@
+    stem: latexmath
+    eqnums: none
+    # sectlinks: true
+    source-highlighter: shiki
+    mathjax-tex-packages: ams mathtools colorv2
+    # Set the tex packages to load, e.g. ':mathjax-tex-packages: ams physics'. This must be set in the playbook or as a doc attribute.
+    mathjax-tex-tags: none 
+    # Set the tex 'tags' attribute.
+    # Allowed values are 'none' (default), 'ams' (requires the ams package), and 'all'.
+    # This controls equation numbering.In Antora, equations are numbered per-page.
+    # example-caption: false
+    # listing-caption: false
+
+ui:
+  bundle:
+    url: ../miterra-site-ui/build/ui-bundle.zip
+    snapshot: true
+  output_dir: ui
+
+  
