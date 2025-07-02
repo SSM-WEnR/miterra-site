@@ -1,5 +1,7 @@
 /.cache/
 /build/
 /node_modules/
-git-credentials
 /build-site.*
+*.pdf
+git-credentials
+.DS_Store
