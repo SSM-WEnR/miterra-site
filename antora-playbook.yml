@@ -9,6 +9,11 @@ content:
   - url: https://github.com/SSM-WEnR/miterra-docs.git
     branches: HEAD
     start_path: docs
+
+  - url: https://github.com/SSM-WEnR/miterra-tutorial.git
+    branches: HEAD
+    start_path: docs
+  
   - url: https://github.com/SSM-WEnR/miterra-dev-docs.git
     branches: HEAD
     start_path: docs

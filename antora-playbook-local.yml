@@ -9,6 +9,11 @@ content:
   - url: ../miterra-docs
     branches: HEAD
     start_path: docs
+  
+  - url: ../miterra-tutorial
+    branches: HEAD
+    start_path: docs
+  
   - url: ../miterra-dev-docs
     branches: HEAD
     start_path: docs
