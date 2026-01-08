@@ -30,7 +30,7 @@ permissions:
 jobs:
   build-publish:
     if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, '[Release]')
-    runs-on: macos-13
+    runs-on: macos-15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
