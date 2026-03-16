@@ -126,13 +126,12 @@ jobs:
     # Tag source repo
     - name: Tag miterra-docs
       uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ steps.generate_iat.outputs.token }}
       with:
         draft: false
         prerelease: false
         make_latest: true
         repository: SSM-WEnR/miterra-docs
+        token: ${{ steps.generate_iat.outputs.token }}
         name: ${{ steps.version.outputs.v-version }}
         tag_name: ${{ steps.version.outputs.v-version }}
         body: This release is created as a snapshot for `miterra-site` release [${{ steps.version.outputs.v-version }}](${{ steps.make_release.outputs.url }}) on ${{ env.datetime }}.
