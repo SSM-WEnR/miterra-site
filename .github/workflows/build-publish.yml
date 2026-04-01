@@ -30,7 +30,7 @@ permissions:
 jobs:
   build-publish:
     if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, '[Release]')
-    runs-on: macos-15
+    runs-on: macos-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -39,12 +39,12 @@ jobs:
     # ----------------------------------------
     # Build
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
     
     - name: Install Antora with extensions
@@ -52,7 +52,7 @@ jobs:
     
     - name: Generate GitHub App installation access token (IAT)
       id: generate_iat
-      uses: actions/create-github-app-token@v2
+      uses: actions/create-github-app-token@v3
       with:
         app-id: ${{ secrets.BOT_APP_ID }}
         private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
@@ -66,16 +66,16 @@ jobs:
     # ----------------------------------------
     # Deploy: deploy must take place before release, as the release step will modify the build.
     - name: Configure GitHub Pages
-      uses: actions/configure-pages@v5
+      uses: actions/configure-pages@v6
     
     - name: Upload artifacts to GitHub Pages
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
         path: ./build
     
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
 
     # ----------------------------------------
     # Release
